@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome • Home Discord</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="entrance-body">
+<div class="carti-bg">
+    <!-- 10 Carti-style tiles (you can swap the image URL in CSS for real Carti pics you download) -->
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+    <div class="carti-tile"></div>
+</div>
+
+<div class="overlay-gradient"></div>
+
+<main class="entrance-main">
+    <section class="entrance-card">
+        <h1>Click to Give Us All Your Information</h1>
+        <p>
+            Totally safe. Absolutely normal. Definitely not playing mysterious background music while your soul
+            gets scanned by Discord.
+        </p>
+        <button id="infoButton">Click Here</button>
+        <p class="entrance-note">After you click, you can enter the Hall of Fame.</p>
+
+        <div id="enterSection" class="enter-section hidden">
+            <p class="enter-text">Information successfully stolen. You may now proceed.</p>
+            <a href="top10.html" class="enter-link">Enter the Home Discord Hall of Fame</a>
+        </div>
+    </section>
+</main>
+
+<audio id="cartiAudio" loop>
+    <!-- Put a file called bg-music.mp3 in the same folder as this HTML,
+         or change the src below to any audio file URL you have permission to use. -->
+    <source src="bg-music.mp3" type="audio/mpeg" />
+</audio>
+
+<script src="script.js"></script>
+</body>
+</html>
