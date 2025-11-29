@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (infoButton && enterSection) {
         infoButton.addEventListener('click', () => {
             if (cartiAudio) {
-                // Try to play background music after user interaction
                 cartiAudio.play().catch(() => {
                     console.log('Audio play blocked or file missing. Make sure bg-music.mp3 exists or update the src.');
                 });
@@ -61,6 +60,88 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
+        });
+    }
+
+    // Application page logic (localStorage comments)
+    const appForm = document.getElementById('applicationForm');
+    const appsList = document.getElementById('applicationsList');
+
+    const storageKey = 'homeDiscordApplications';
+
+    const loadApplications = () => {
+        if (!appsList) return;
+        appsList.innerHTML = '';
+        let stored = [];
+        try {
+            stored = JSON.parse(localStorage.getItem(storageKey)) || [];
+        } catch (e) {
+            stored = [];
+        }
+        stored.forEach(addApplicationCard);
+    };
+
+    const saveApplications = (apps) => {
+        try {
+            localStorage.setItem(storageKey, JSON.stringify(apps));
+        } catch (e) {
+            console.log('Could not save applications to localStorage.', e);
+        }
+    };
+
+    const addApplicationCard = (app) => {
+        if (!appsList) return;
+        const card = document.createElement('div');
+        card.className = 'application-card';
+
+        const header = document.createElement('div');
+        header.className = 'application-header';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'application-name';
+        nameSpan.textContent = app.name;
+
+        const discordSpan = document.createElement('span');
+        discordSpan.className = 'application-discord';
+        discordSpan.textContent = app.discord;
+
+        header.appendChild(nameSpan);
+        header.appendChild(discordSpan);
+
+        const reasonP = document.createElement('p');
+        reasonP.className = 'application-reason';
+        reasonP.textContent = app.reason;
+
+        card.appendChild(header);
+        card.appendChild(reasonP);
+
+        appsList.prepend(card);
+    };
+
+    if (appForm && appsList) {
+        loadApplications();
+
+        appForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('appName').value.trim();
+            const discord = document.getElementById('appDiscord').value.trim();
+            const reason = document.getElementById('appReason').value.trim();
+
+            if (!name || !discord || !reason) return;
+
+            const newApp = { name, discord, reason, time: Date.now() };
+
+            let existing = [];
+            try {
+                existing = JSON.parse(localStorage.getItem(storageKey)) || [];
+            } catch (err) {
+                existing = [];
+            }
+            existing.push(newApp);
+            saveApplications(existing);
+            addApplicationCard(newApp);
+
+            appForm.reset();
         });
     }
 });

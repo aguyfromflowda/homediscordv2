@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Application • Home Discord</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="bg-gradient"></div>
+
+<header class="nav">
+    <div class="logo">📝 Application</div>
+    <nav class="nav-links">
+        <a href="top12.html">Top 12 Members</a>
+        <a href="sizes.html">Sizes</a>
+        <a href="application.html" class="active">Application</a>
+        <a href="channel9.html">Channel 9 Chat</a>
+    </nav>
+</header>
+
+<main class="content">
+    <section class="hero">
+        <h1>Apply to Join the Chaos</h1>
+        <p>
+            Fill this out if you think you&apos;re unhinged enough, funny enough, or emotionally damaged enough
+            to belong in Home Discord.
+        </p>
+        <span class="tiny">Nothing here is serious, but type like it is.</span>
+    </section>
+
+    <section class="application-section">
+        <form id="applicationForm" class="application-form">
+            <div class="field">
+                <label for="appName">Your Name</label>
+                <input type="text" id="appName" name="appName" placeholder="Dol 2.0" required />
+            </div>
+
+            <div class="field">
+                <label for="appDiscord">Discord @</label>
+                <input type="text" id="appDiscord" name="appDiscord" placeholder="username#0000 or @user" required />
+            </div>
+
+            <div class="field">
+                <label for="appReason">Why should you join?</label>
+                <textarea id="appReason" name="appReason" rows="4"
+                          placeholder="Explain why you belong in Channel 9 instead of therapy." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+
+        <section class="applications-list-section">
+            <h2>Submitted Applications</h2>
+            <p class="tiny">Stored in your browser only. Refresh-safe, but not server-wide.</p>
+            <div id="applicationsList" class="applications-list">
+                <!-- JS will inject application cards here -->
+            </div>
+        </section>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>By submitting, you agree to be lightly bullied and heavily loved • Home Discord</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
