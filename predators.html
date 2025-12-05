@@ -1,44 +1,141 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 <head>
-<meta charset='UTF-8'>
-<title>Predators</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <title>Predators • Home Discord</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .predator-card {
+            cursor: default;
+        }
+        .predator-image {
+            width: 260px;
+            max-width: 100%;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            border: 2px solid rgba(248,113,113,0.8);
+        }
+        .audio-wrapper {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .play-button {
+            padding: 8px 18px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(to right, #ef4444, #f97316);
+            color: #f9fafb;
+            box-shadow: 0 10px 20px rgba(248,113,113,0.5);
+        }
+        .play-button:hover {
+            filter: brightness(1.05);
+        }
+        .play-status {
+            font-size: 0.8rem;
+            color: #e5e7eb;
+            opacity: 0.85;
+        }
+        audio#predatorsAudio {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div class="bg-gradient"></div>
 
 <header class="nav">
-<div class="logo">🦂 Predators</div>
-<nav class="nav-links">
-<a href="top12.html">Top 12 Members</a>
-<a href="sizes.html">Sizes</a>
-<a href="application.html">Application</a>
-<a href="channel9.html">Channel 9 Chat</a>
-<a href="predators.html" class="active">Predators</a>
-</nav>
+    <div class="logo">🦂 Predators</div>
+    <nav class="nav-links">
+        <a href="top12.html">Top 12 Members</a>
+        <a href="sizes.html">Sizes</a>
+        <a href="application.html">Application</a>
+        <a href="channel9.html">Channel 9 Chat</a>
+        <a href="predators.html" class="active">Predators</a>
+    </nav>
 </header>
 
 <main class="content">
-<section class="hero">
-<h1>Team Predators</h1>
-<p>The elite pedophiles</p>
-</section>
+    <section class="hero">
+        <h1>Team Predators</h1>
+        <p>Elite members with unmatched chaotic skill. Overcome is the face of the operation.</p>
+        <span class="tiny">Featuring an exclusive Predator voice recording.</span>
+    </section>
 
-<section class="grid">
-<article class="member-card size-card">
-<img src="ds.jpg" class="size-avatar" style="width:260px;height:auto;border-radius:14px;" />
-<h2>Overcome</h2>
-<p class="size-value">Rank: Predator Unit Leader</p>
-<p>Overcome is now registetered as a pedophile with quotes like "I like them freshly 18" and video footage of him speaking to 15 year olds!</p>
-</article>
-</section>
+    <section class="grid">
+        <article class="member-card predator-card">
+            <img src="ds.jpg" alt="Overcome" class="predator-image" />
+            <h2>Overcome</h2>
+            <p class="size-value">Rank: Predator Unit Leader</p>
+            <p>Overcome is really good. Certified menace and captain of Team Predators.</p>
+
+            <div class="audio-wrapper">
+                <button id="playPredator" class="play-button">▶ Play Voice Recording</button>
+                <span id="playPredatorStatus" class="play-status">Not playing</span>
+            </div>
+
+            <audio id="predatorsAudio">
+                <source src="predators-voice.mp3" type="audio/mpeg" />
+            </audio>
+        </article>
+    </section>
 </main>
 
 <footer class="footer">
-<p>Predators Division • Home Discord</p>
+    <p>Predators Division • Home Discord</p>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const audio = document.getElementById('predatorsAudio');
+    const btn = document.getElementById('playPredator');
+    const status = document.getElementById('playPredatorStatus');
+    if (!audio || !btn) return;
+
+    let isPlaying = false;
+
+    const setState = (state) => {
+        if (state === 'playing') {
+            isPlaying = true;
+            btn.textContent = '⏸ Pause Voice Recording';
+            if (status) status.textContent = 'Playing...';
+        } else if (state === 'paused') {
+            isPlaying = false;
+            btn.textContent = '▶ Play Voice Recording';
+            if (status) status.textContent = 'Paused';
+        } else if (state === 'ended') {
+            isPlaying = false;
+            btn.textContent = '▶ Play Voice Recording';
+            if (status) status.textContent = 'Finished';
+        }
+    };
+
+    btn.addEventListener('click', function () {
+        if (!isPlaying) {
+            audio.play().then(() => {
+                setState('playing');
+            }).catch((err) => {
+                console.log('Could not play audio', err);
+                if (status) status.textContent = 'Error playing audio';
+            });
+        } else {
+            audio.pause();
+            setState('paused');
+        }
+    });
+
+    audio.addEventListener('ended', function () {
+        setState('ended');
+    });
+});
+</script>
 
 </body>
 </html>
